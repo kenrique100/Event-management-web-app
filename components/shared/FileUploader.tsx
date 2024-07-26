@@ -1,16 +1,12 @@
 'use client'
 
 import { useCallback, Dispatch, SetStateAction } from 'react'
+import type { FileWithPath } from '@uploadthing/react'
 import { useDropzone } from '@uploadthing/react/hooks'
 import { generateClientDropzoneAccept } from 'uploadthing/client'
 
 import { Button } from '@/components/ui/button'
 import { convertFileToUrl } from '@/lib/utils'
-
-// Define FileWithPath type as it's not exported by @uploadthing/react
-type FileWithPath = File & {
-  path?: string;
-}
 
 type FileUploaderProps = {
   onFieldChange: (url: string) => void
@@ -21,25 +17,22 @@ type FileUploaderProps = {
 export function FileUploader({ imageUrl, onFieldChange, setFiles }: FileUploaderProps) {
   const onDrop = useCallback((acceptedFiles: FileWithPath[]) => {
     setFiles(acceptedFiles)
-    if (acceptedFiles.length > 0) {
-      onFieldChange(convertFileToUrl(acceptedFiles[0]))
-    }
-  }, [setFiles, onFieldChange])
+    onFieldChange(convertFileToUrl(acceptedFiles[0]))
+  }, [])
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: generateClientDropzoneAccept(['image/*']),
+    accept: 'image/*' ? generateClientDropzoneAccept(['image/*']) : undefined,
   })
 
   return (
     <div
       {...getRootProps()}
-      className="flex-center bg-dark-3 flex h-72 cursor-pointer flex-col overflow-hidden rounded-xl bg-grey-50"
-    >
+      className="flex-center bg-dark-3 flex h-72 cursor-pointer flex-col overflow-hidden rounded-xl bg-grey-50">
       <input {...getInputProps()} className="cursor-pointer" />
 
       {imageUrl ? (
-        <div className="flex h-full w-full flex-1 justify-center">
+        <div className="flex h-full w-full flex-1 justify-center ">
           <img
             src={imageUrl}
             alt="image"
