@@ -1,5 +1,3 @@
-// next.config.mjs
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -14,5 +12,5 @@ const nextConfig = {
   productionBrowserSourceMaps: true, // Enable source maps in production
 };
 
-// Export default using ES module syntax
+// Use ES Module export
 export default nextConfig;
