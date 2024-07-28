@@ -1,6 +1,9 @@
+// next.config.mjs
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    domains: ['utfs.io'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -9,8 +12,7 @@ const nextConfig = {
       },
     ],
   },
-  productionBrowserSourceMaps: true, // Enable source maps in production
 };
 
-// Use ES Module export
+// Export using ES module syntax
 export default nextConfig;
