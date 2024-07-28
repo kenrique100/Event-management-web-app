@@ -1,4 +1,4 @@
-// next.config.mjs
+// next.config.js
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -8,11 +8,12 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'utfs.io',
-        port: '',
-      },
-    ],
+        port: ''
+      }
+    ]
   },
+  productionBrowserSourceMaps: true // Enable source maps in production
 };
 
-// Export using ES module syntax
-export default nextConfig;
+// Use CommonJS export syntax
+module.exports = nextConfig;
